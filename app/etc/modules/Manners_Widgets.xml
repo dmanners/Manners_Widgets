@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Manners_Widgets.xml
+ *	- Activate module,
+ *	- Specify code pool,
+ *	- Set-up dependencies
+ *
+ * @author      david.manners
+ * @category    Manners
+ * @package     Manners_Widgets
+ */
+-->
+<config>
+	<modules>
+		<Manners_Widgets>
+			<active>true</active>
+			<codePool>community</codePool>
+			<depends>
+				<Mage_Adminhtml />
+				<Mage_Widget />
+			</depends>
+		</Manners_Widgets>
+	</modules>
+</config>

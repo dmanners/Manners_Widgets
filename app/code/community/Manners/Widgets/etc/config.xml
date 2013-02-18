@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * config.xml
+ *
+ * @author      david.manners
+ * @category    Manners
+ * @package     Manners_Widgets
+ */
+-->
+<config>
+	<modules>
+		<Manners_Widgets>
+			<version>1.0.0</version>
+		</Manners_Widgets>
+	</modules>
+
+	<global>
+		<blocks>
+			<manners_widgets>
+				<class>Manners_Widgets_Block</class>
+			</manners_widgets>
+		</blocks>
+
+		<helpers>
+			<manners_widgets>
+				<class>Manners_Widgets_Helper</class>
+			</manners_widgets>
+		</helpers>
+	</global>
+</config>
