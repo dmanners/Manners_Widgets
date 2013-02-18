@@ -17,7 +17,7 @@ class Manners_Widgets_Block_Catalog_Product_Widget_Chooser extends Mage_Adminhtm
 	 */
 	public function prepareElementHtml(Varien_Data_Form_Element_Abstract $oElement) {
 		$bUseMassAction = false;
-		if($this->getConfig('use_massaction') == TRUE) {
+		if($this->getConfig('use_massaction') == true) {
 			$bUseMassAction = true;
 		}
 		$iUniqueId = Mage::helper('core')->uniqHash($oElement->getId());
