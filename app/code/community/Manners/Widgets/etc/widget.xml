@@ -15,7 +15,7 @@
 		<parameters>
 			<product_ids translate="label">
 				<visible>1</visible>
-				<required>0</required>
+				<required>1</required>
 				<label>Product</label>
 				<type>label</type>
 				<helper_block>

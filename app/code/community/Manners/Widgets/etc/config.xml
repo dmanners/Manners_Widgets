@@ -20,6 +20,11 @@
 			<manners_widgets>
 				<class>Manners_Widgets_Block</class>
 			</manners_widgets>
+			<adminhtml>
+				<rewrite>
+					<catalog_product_widget_chooser>Manners_Widgets_Block_Catalog_Product_Widget_Chooser</catalog_product_widget_chooser>
+				</rewrite>
+			</adminhtml>
 		</blocks>
 
 		<helpers>
