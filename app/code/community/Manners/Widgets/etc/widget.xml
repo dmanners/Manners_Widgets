@@ -24,7 +24,6 @@
 						<button translate="open remove">
 							<open>Select Products...</open>
 						</button>
-						<use_massaction>1</use_massaction>
 					</data>
 				</helper_block>
 			</product_ids>
