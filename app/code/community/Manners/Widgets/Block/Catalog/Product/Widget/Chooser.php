@@ -18,7 +18,7 @@ class Manners_Widgets_Block_Catalog_Product_Widget_Chooser extends Mage_Adminhtm
 			'header'    => Mage::helper('catalog')->__('ID'),
 			'sortable'  => true,
 			'width'     => '60px',
-			'index'     => 'entity_id'
+			'index'     => 'entity_id',
 		));
 		$this->addColumn('chooser_sku', array(
 			'header'    => Mage::helper('catalog')->__('SKU'),
@@ -43,7 +43,8 @@ class Manners_Widgets_Block_Catalog_Product_Widget_Chooser extends Mage_Adminhtm
 	protected function _prepareMassaction() {
 		$this->setMassactionIdField('entity_id');
 		$this->setMassactionIdFilter('entity_id');
-		$this->getMassactionBlock()->setFormFieldName('product');
+		$this->getMassactionBlock()->setFormFieldName('products');
+		$this->getMassactionBlock()->setFormFieldNameInternal('element_value');
 
 		$this->getMassactionBlock()->setData('parent_id', $this->getId());
 		$this->getMassactionBlock()->addItem('add', array(

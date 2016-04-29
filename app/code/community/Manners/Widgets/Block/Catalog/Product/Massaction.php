@@ -1,6 +1,25 @@
 <?php
 class Manners_Widgets_Block_Catalog_Product_Massaction extends Mage_Adminhtml_Block_Widget_Grid_Massaction
 {
+    private $sInternalName;
+    /**
+     * Retrieve form field name for internal use. Based on $this->getFormFieldName()
+     *
+     * @return string
+     */
+    public function setFormFieldNameInternal($sString)
+    {
+        return $this->sInternalName = $sString;
+    }
+
+    public function getFormFieldNameInternal()
+    {
+        if ($this->sInternalName !== null) {
+            return $this->sInternalName;
+        }
+        return parent::getFormFieldNameInternal();
+    }
+
     /**
      * Set-up the button
      *
