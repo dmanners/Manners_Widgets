@@ -1,12 +1,14 @@
 <?php
-/**
- * Manners_Widgets_Block_Catalog_Product_Widget_Chooser
- *
- * @author      david.manners
- * @category    Manners
- * @package     Manners_Widgets
- */
-class Manners_Widgets_Block_Catalog_Product_Widget_Chooser extends Mage_Adminhtml_Block_Catalog_Product_Widget_Chooser {
+class Manners_Widgets_Block_Catalog_Product_Widget_Chooser extends Mage_Adminhtml_Block_Catalog_Product_Widget_Chooser
+{
+	/**
+	 * Overrive the massaction block that will be used
+	 */
+	protected function _construct(){
+		parent::_construct();
+		$this->setMassactionBlockName('manners_widgets/catalog_product_massaction');
+	}
+
 	/**
 	 *
 	 * @return Mage_Adminhtml_Block_Widget_Grid|void
@@ -32,44 +34,64 @@ class Manners_Widgets_Block_Catalog_Product_Widget_Chooser extends Mage_Adminhtm
 	}
 
 	/**
+	 * Prepare the massaction
+	 * 	- Block,
+	 * 	- Item
 	 *
 	 * @return $this|Mage_Adminhtml_Block_Widget_Grid
 	 */
 	protected function _prepareMassaction() {
 		$this->setMassactionIdField('entity_id');
+		$this->setMassactionIdFilter('entity_id');
 		$this->getMassactionBlock()->setFormFieldName('product');
 
-		$this->getMassactionBlock()->addItem('delete', array(
-			'label'=> Mage::helper('catalog')->__('Delete'),
-			'url'  => $this->getUrl('*/*/massDelete'),
-			'confirm' => Mage::helper('catalog')->__('Are you sure?')
+		$this->getMassactionBlock()->setData('parent_id', $this->getId());
+		$this->getMassactionBlock()->addItem('add', array(
+			'label'=> Mage::helper('catalog')->__('Add Products'),
+			'url'  => $this->getUrl('*/*/addProducts')
 		));
 
-		$statuses = Mage::getSingleton('catalog/product_status')->getOptionArray();
-
-		array_unshift($statuses, array('label'=>'', 'value'=>''));
-		$this->getMassactionBlock()->addItem('status', array(
-			'label'=> Mage::helper('catalog')->__('Change status'),
-			'url'  => $this->getUrl('*/*/massStatus', array('_current'=>true)),
-			'additional' => array(
-				'visibility' => array(
-					'name' => 'status',
-					'type' => 'select',
-					'class' => 'required-entry',
-					'label' => Mage::helper('catalog')->__('Status'),
-					'values' => $statuses
-				)
-			)
-		));
-
-		if (Mage::getSingleton('admin/session')->isAllowed('catalog/update_attributes')){
-			$this->getMassactionBlock()->addItem('attributes', array(
-				'label' => Mage::helper('catalog')->__('Update Attributes'),
-				'url'   => $this->getUrl('*/catalog_product_action_attribute/edit', array('_current'=>true))
-			));
-		}
-
-		Mage::dispatchEvent('adminhtml_catalog_product_grid_prepare_massaction', array('block' => $this));
+		Mage::dispatchEvent('manners_widgets_catalog_product_grid_prepare_massaction', array('block' => $this));
 		return $this;
 	}
+
+//	/**
+//	 * Checkbox Check JS Callback
+//	 *
+//	 * @return string
+//	 */
+//	public function getCheckboxCheckCallback()
+//	{
+//		return "function (grid, element) {
+//                $(grid.containerId).fire('product:changed', {element: element});
+//            }";
+//	}
+
+//	/**
+//	 * Grid Row JS Callback
+//	 *
+//	 * @return string
+//	 */
+//	public function getRowClickCallback()
+//	{
+//		$chooserJsObject = $this->getId();
+//		return '
+//                    function (grid, event) {
+//                        var trElement = Event.findElement(event, "tr");
+//                        var productId = trElement.down("td").innerHTML;
+//                        var productName = trElement.down("td").next().next().innerHTML;
+//                        var optionLabel = productName;
+//                        var optionValue = "product/" + productId.replace(/^\s+|\s+$/g,"");
+//                        if (grid.categoryId) {
+//                            optionValue += "/" + grid.categoryId;
+//                        }
+//                        if (grid.categoryName) {
+//                            optionLabel = grid.categoryName + " / " + optionLabel;
+//                        }
+//                        '.$chooserJsObject.'.setElementValue(optionValue);
+//                        '.$chooserJsObject.'.setElementLabel(optionLabel);
+//                        '.$chooserJsObject.'.close();
+//                    }
+//                ';
+//	}
 }
