@@ -1,0 +1,8 @@
+{
+    "name": "manners/widgets",
+    "description": "A module for extended widget options in Magento 1.",
+    "type": "magento-module",
+    "require": {
+        "php": "~5.5"
+    }
+}
