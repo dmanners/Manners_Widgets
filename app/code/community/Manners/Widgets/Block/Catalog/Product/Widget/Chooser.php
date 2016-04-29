@@ -54,4 +54,39 @@ class Manners_Widgets_Block_Catalog_Product_Widget_Chooser extends Mage_Adminhtm
 		Mage::dispatchEvent('manners_widgets_catalog_product_grid_prepare_massaction', array('block' => $this));
 		return $this;
 	}
+
+	/**
+	 * Prepare chooser element HTML
+	 *
+	 * @param Varien_Data_Form_Element_Abstract $element Form Element
+	 * @return Varien_Data_Form_Element_Abstract
+	 */
+	public function prepareElementHtml(Varien_Data_Form_Element_Abstract $element)
+	{
+		$uniqId = Mage::helper('core')->uniqHash($element->getId());
+		$sourceUrl = $this->getUrl('*/catalog_product_widget/chooser', array(
+			'uniq_id' => $uniqId,
+			'use_massaction' => true,
+		));
+
+		$chooser = $this->getLayout()->createBlock('widget/adminhtml_widget_chooser')
+			->setElement($element)
+			->setTranslationHelper($this->getTranslationHelper())
+			->setConfig($this->getConfig())
+			->setFieldsetId($this->getFieldsetId())
+			->setSourceUrl($sourceUrl)
+			->setUniqId($uniqId);
+
+		if ($element->getValue()) {
+			$value = explode(',', $element->getValue());
+			$aLabels = [];
+			foreach ($value as $iProductId) {
+				$aLabels[] = Mage::getResourceSingleton('catalog/product')->getAttributeRawValue($iProductId, 'name', Mage::app()->getStore());
+			}
+			$chooser->setLabel(implode(',', $aLabels));
+		}
+
+		$element->setData('after_element_html', $chooser->toHtml());
+		return $element;
+	}
 }
