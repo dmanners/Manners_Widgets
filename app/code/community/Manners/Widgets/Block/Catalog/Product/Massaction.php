@@ -43,17 +43,21 @@ class Manners_Widgets_Block_Catalog_Product_Massaction extends Mage_Adminhtml_Bl
         $iParentId = $this->getData('parent_id');
         return '
             (function(){
-                var aOptionValue = [];
-                var aOptionLabel = [];
-                $$(\'#' . $iParentId . ' div.grid input[type=checkbox]\').each(function(item) {
-                    if(item.checked === true) {
-                        aOptionValue.push(item.value);
-                        aOptionLabel.push($(item).up().siblings().last().innerHTML.trim());
-                    }
-                });
-                ' . $iParentId . '.setElementValue(aOptionValue.join(\',\'));
-                ' . $iParentId . '.setElementLabel(aOptionLabel.join(\',\'));
+                ' . $iParentId . '.setElementValue(window.'.$this->getJsObjectName().'.getCheckedValues());
+                ' . $iParentId . '.setElementLabel(window.'.$this->getJsObjectName().'.getCheckedValues());
                 '. $iParentId . '.close();
             })()';
+    }
+
+    public function getJavaScript()
+    {
+        return " window.{$this->getJsObjectName()} = new varienGridMassaction('{$this->getHtmlId()}', "
+        . "{$this->getGridJsObjectName()}, '{$this->getSelectedJson()}'"
+        . ", '{$this->getFormFieldNameInternal()}', '{$this->getFormFieldName()}');"
+        . "{$this->getJsObjectName()}.setItems({$this->getItemsJson()}); "
+        . "{$this->getJsObjectName()}.setGridIds('{$this->getGridIdsJson()}');"
+        . ($this->getUseAjax() ? "{$this->getJsObjectName()}.setUseAjax(true);" : '')
+        . ($this->getUseSelectAll() ? "{$this->getJsObjectName()}.setUseSelectAll(true);" : '')
+        . "{$this->getJsObjectName()}.errorText = '{$this->getErrorText()}';";
     }
 }
