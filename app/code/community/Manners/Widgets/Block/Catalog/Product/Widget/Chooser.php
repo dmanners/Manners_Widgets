@@ -2,7 +2,7 @@
 class Manners_Widgets_Block_Catalog_Product_Widget_Chooser extends Mage_Adminhtml_Block_Catalog_Product_Widget_Chooser
 {
 	/**
-	 * Overrive the massaction block that will be used
+	 * Override the mass-action block that will be used
 	 */
 	protected function _construct(){
 		parent::_construct();
@@ -54,44 +54,4 @@ class Manners_Widgets_Block_Catalog_Product_Widget_Chooser extends Mage_Adminhtm
 		Mage::dispatchEvent('manners_widgets_catalog_product_grid_prepare_massaction', array('block' => $this));
 		return $this;
 	}
-
-//	/**
-//	 * Checkbox Check JS Callback
-//	 *
-//	 * @return string
-//	 */
-//	public function getCheckboxCheckCallback()
-//	{
-//		return "function (grid, element) {
-//                $(grid.containerId).fire('product:changed', {element: element});
-//            }";
-//	}
-
-//	/**
-//	 * Grid Row JS Callback
-//	 *
-//	 * @return string
-//	 */
-//	public function getRowClickCallback()
-//	{
-//		$chooserJsObject = $this->getId();
-//		return '
-//                    function (grid, event) {
-//                        var trElement = Event.findElement(event, "tr");
-//                        var productId = trElement.down("td").innerHTML;
-//                        var productName = trElement.down("td").next().next().innerHTML;
-//                        var optionLabel = productName;
-//                        var optionValue = "product/" + productId.replace(/^\s+|\s+$/g,"");
-//                        if (grid.categoryId) {
-//                            optionValue += "/" + grid.categoryId;
-//                        }
-//                        if (grid.categoryName) {
-//                            optionLabel = grid.categoryName + " / " + optionLabel;
-//                        }
-//                        '.$chooserJsObject.'.setElementValue(optionValue);
-//                        '.$chooserJsObject.'.setElementLabel(optionLabel);
-//                        '.$chooserJsObject.'.close();
-//                    }
-//                ';
-//	}
 }

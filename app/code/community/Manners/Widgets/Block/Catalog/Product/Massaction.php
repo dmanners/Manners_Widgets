@@ -1,5 +1,11 @@
 <?php
-class Manners_Widgets_Block_Catalog_Product_Massaction extends Mage_Adminhtml_Block_Widget_Grid_Massaction{
+class Manners_Widgets_Block_Catalog_Product_Massaction extends Mage_Adminhtml_Block_Widget_Grid_Massaction
+{
+    /**
+     * Set-up the button
+     *
+     * @return string
+     */
     public function getApplyButtonHtml()
     {
         return $this->getButtonHtml(
@@ -9,22 +15,26 @@ class Manners_Widgets_Block_Catalog_Product_Massaction extends Mage_Adminhtml_Bl
     }
 
     /**
-     *             'var optionValue = "1,2,3,4";'
-    . 'var optionLabel = "Product 1, Product 2,Product 3,Product 4";'
-    . $iParentId.'.setElementValue(optionValue);'
-    . $iParentId.'.setElementLabel(optionLabel);'
-    . $iParentId.'.close()'
+     * Get the onClick function
+     *
      * @return string
      */
     private function getButtonJs()
     {
+        $iParentId = $this->getData('parent_id');
         return '
             (function(){
-                var sOptionValue = \'1,2,3\';
-                var sOptionLabel = \'Test\';
-                ' . $this->getData('parent_id').'.setElementValue(sOptionValue);
-                ' . $this->getData('parent_id').'.setElementLabel(sOptionLabel);
-                '. $this->getData('parent_id').'.close();
+                var aOptionValue = [];
+                var aOptionLabel = [];
+                $$(\'#' . $iParentId . ' div.grid input[type=checkbox]\').each(function(item) {
+                    if(item.checked === true) {
+                        aOptionValue.push(item.value);
+                        aOptionLabel.push($(item).up().siblings().last().innerHTML.trim());
+                    }
+                });
+                ' . $iParentId . '.setElementValue(aOptionValue.join(\',\'));
+                ' . $iParentId . '.setElementLabel(aOptionLabel.join(\',\'));
+                '. $iParentId . '.close();
             })()';
     }
 }
