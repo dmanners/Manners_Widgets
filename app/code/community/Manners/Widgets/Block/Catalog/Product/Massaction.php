@@ -56,13 +56,15 @@ class Manners_Widgets_Block_Catalog_Product_Massaction extends Mage_Adminhtml_Bl
      */
     private function getButtonJs()
     {
-        $iParentId = $this->getData('parent_id');
-        return '
-            (function(){
-                ' . $iParentId . '.setElementValue(window.' . $this->getJsObjectName() . '.getCheckedValues());
-                ' . $iParentId . '.setElementLabel(window.' . $this->getJsObjectName() . '.getCheckedValues());
-                ' . $iParentId . '.close();
-            })()';
+        return sprintf(
+            '(function(){
+                %1$s.setElementValue(window.%2$s.getCheckedValues());
+                %1$s.setElementLabel(window.%2$s.getCheckedValues());
+                %1$s.close();
+            })()',
+            $this->getData('parent_id'),
+            $this->getJsObjectName()
+        );
     }
 
     /**
@@ -72,13 +74,38 @@ class Manners_Widgets_Block_Catalog_Product_Massaction extends Mage_Adminhtml_Bl
      */
     public function getJavaScript()
     {
-        return " window.{$this->getJsObjectName()} = new varienGridMassaction('{$this->getHtmlId()}', "
-        . "{$this->getGridJsObjectName()}, '{$this->getSelectedJson()}'"
-        . ", '{$this->getFormFieldNameInternal()}', '{$this->getFormFieldName()}');"
-        . "{$this->getJsObjectName()}.setItems({$this->getItemsJson()}); "
-        . "{$this->getJsObjectName()}.setGridIds('{$this->getGridIdsJson()}');"
-        . ($this->getUseAjax() ? "{$this->getJsObjectName()}.setUseAjax(true);" : '')
-        . ($this->getUseSelectAll() ? "{$this->getJsObjectName()}.setUseSelectAll(true);" : '')
-        . "{$this->getJsObjectName()}.errorText = '{$this->getErrorText()}';";
+        $sJavaScript = sprintf(
+            'window.%1$s = new varienGridMassaction(
+                "%2$s",
+                %3$s,
+                "%4$s",
+                "%5$s",
+                "%6$s");
+            %1$s.setItems(%7$s);
+            %1$s.setGridIds("%8$s");
+            %1$s.errorText = "%9$s"; ',
+            $this->getJsObjectName(),
+            $this->getHtmlId(),
+            $this->getGridJsObjectName(),
+            $this->getSelectedJson(),
+            $this->getFormFieldNameInternal(),
+            $this->getFormFieldName(),
+            $this->getItemsJson(),
+            $this->getGridIdsJson(),
+            $this->getErrorText()
+        );
+        if ($this->getUseAjax()) {
+            $sJavaScript .= sprintf(
+                '%1$s.setUseAjax(true);',
+                $this->getJsObjectName()
+            );
+        }
+        if ($this->getUseSelectAll()) {
+            $sJavaScript .= sprintf(
+                '%1$s.setUseSelectAll(true);',
+                $this->getJsObjectName()
+            );
+        }
+        return $sJavaScript;
     }
 }
