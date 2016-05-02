@@ -1,0 +1,35 @@
+<?php
+$oProductCollection = $this->getProductCollection();
+$oOutputHelper      = $this->helper('catalog/output');
+$oProductHelper     = $this->helper('catalog/product');
+?>
+
+<div class="products__list" id="products-list">
+    <?php $iIterator = 0; ?>
+    <?php foreach ($oProductCollection as $oProduct): ?>
+        <div class="item<?php if (++$iIterator == sizeof($oProductCollection)): ?> last<?php endif; ?>  products__list-item">
+            <?php // Product Image ?>
+            <a href="<?php echo $oProduct->getProductUrl() ?>"
+               title="<?php echo $this->stripTags($this->getImageLabel($oProduct, 'small_image'), null, true) ?>"
+               class="product__image">
+                <img src="<?php echo $this->helper('catalog/image')->init($oProduct, 'small_image')->resize(275); ?>"
+                     alt="<?php echo $this->stripTags($this->getImageLabel($oProduct, 'small_image'), null, true) ?>"/>
+            </a>
+            <?php // Product description ?>
+            <div class="product__shop">
+                <?php $sProductNameStripped = $this->stripTags($oProduct->getName(), null, true); ?>
+                <h2 class="product__name">
+                    <a href="<?php echo $oProduct->getProductUrl() ?>"
+                       title="<?php echo $sProductNameStripped; ?>">
+                        <?php echo $oOutputHelper->productAttribute($oProduct, $oProduct->getName(), 'name'); ?>
+                    </a>
+                </h2>
+                <?php if ($oProduct->hasShortDescription()): ?>
+                    <p class="product__short-description"><?php echo $oOutputHelper->productAttribute($oProduct, $oProduct->getShortDescription(), 'short_description') ?></p>
+                <?php endif; ?>
+                <?php $productObject = Mage::getModel('catalog/product')->load($oProduct->getId());?>
+                <?php echo $this->getPriceHtml($productObject) ?>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
