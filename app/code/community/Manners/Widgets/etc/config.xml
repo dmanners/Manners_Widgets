@@ -1,36 +1,41 @@
 <?xml version="1.0"?>
 <!--
 /**
- * config.xml
- *
- * @author      david.manners
  * @category    Manners
  * @package     Manners_Widgets
+ * @copyright   Copyright (c) David Manners (http://davidmanners.de/)
  */
 -->
 <config>
-	<modules>
-		<Manners_Widgets>
-			<version>1.0.0</version>
-		</Manners_Widgets>
-	</modules>
+    <modules>
+        <Manners_Widgets>
+            <version>1.0.0</version>
+        </Manners_Widgets>
+    </modules>
 
-	<global>
-		<blocks>
-			<manners_widgets>
-				<class>Manners_Widgets_Block</class>
-			</manners_widgets>
-			<adminhtml>
-				<rewrite>
-					<catalog_product_widget_chooser>Manners_Widgets_Block_Catalog_Product_Widget_Chooser</catalog_product_widget_chooser>
-				</rewrite>
-			</adminhtml>
-		</blocks>
+    <global>
+        <blocks>
+            <manners_widgets>
+                <class>Manners_Widgets_Block</class>
+            </manners_widgets>
+        </blocks>
 
-		<helpers>
-			<manners_widgets>
-				<class>Manners_Widgets_Helper</class>
-			</manners_widgets>
-		</helpers>
-	</global>
+        <helpers>
+            <manners_widgets>
+                <class>Manners_Widgets_Helper</class>
+            </manners_widgets>
+        </helpers>
+    </global>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Manners_Widgets after="Mage_Adminhtml">Manners_Widgets_Adminhtml</Manners_Widgets>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
 </config>

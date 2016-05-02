@@ -128,7 +128,7 @@ class Manners_Widgets_Block_Catalog_Product_Widget_Chooser extends Mage_Adminhtm
     {
         $iUniqId = Mage::helper('core')->uniqHash($oElement->getId());
         $sSourceUrl = $this->getUrl(
-            '*/catalog_product_widget/chooser',
+            '*/product_multiple_widget/chooser',
             [
                 'uniq_id' => $iUniqId,
                 'use_massaction' => true,

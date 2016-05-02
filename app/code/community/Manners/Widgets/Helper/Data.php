@@ -1,12 +1,11 @@
 <?php
+
 /**
- * Manners_Widgets_Helper_Data
- *
- * Create an empty helper class to provide translations
- *
- * @author      david.manners
  * @category    Manners
  * @package     Manners_Widgets
+ * @copyright   Copyright (c) David Manners (http://davidmanners.de/)
  */
-class Manners_Widgets_Helper_Data extends Mage_Core_Helper_Abstract {
+
+class Manners_Widgets_Helper_Data extends Mage_Core_Helper_Abstract
+{
 }

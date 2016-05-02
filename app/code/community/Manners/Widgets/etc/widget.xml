@@ -1,32 +1,30 @@
 <?xml version="1.0"?>
 <!--
 /**
- * widget.xml
- *
- * @author      david.manners
  * @category    Manners
  * @package     Manners_Widgets
+ * @copyright   Copyright (c) David Manners (http://davidmanners.de/)
  */
 -->
 <widgets>
-	<manners_widgets_products type="manners_widgets/products" translate="name description" module="manners_widgets">
-		<name>Multiple Products Widget</name>
-		<description>Widget to display multiple products on one page</description>
-		<parameters>
-			<product_ids translate="label">
-				<visible>1</visible>
-				<required>1</required>
-				<label>Product</label>
-				<type>label</type>
-				<helper_block>
-					<type>manners_widgets/catalog_product_widget_chooser</type>
-					<data>
-						<button translate="open remove">
-							<open>Select Products...</open>
-						</button>
-					</data>
-				</helper_block>
-			</product_ids>
-		</parameters>
-	</manners_widgets_products>
+    <manners_widgets_products type="manners_widgets/products" translate="name description" module="manners_widgets">
+        <name>Multiple Products Widget</name>
+        <description>Widget to display multiple products on one page</description>
+        <parameters>
+            <product_ids translate="label">
+                <visible>1</visible>
+                <required>1</required>
+                <label>Product</label>
+                <type>label</type>
+                <helper_block>
+                    <type>manners_widgets/catalog_product_widget_chooser</type>
+                    <data>
+                        <button translate="open remove">
+                            <open>Select Products...</open>
+                        </button>
+                    </data>
+                </helper_block>
+            </product_ids>
+        </parameters>
+    </manners_widgets_products>
 </widgets>
