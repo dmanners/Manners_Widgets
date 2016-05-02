@@ -59,7 +59,7 @@ class Manners_Widgets_Block_Catalog_Product_Massaction extends Mage_Adminhtml_Bl
         return sprintf(
             '(function(){
                 %1$s.setElementValue(window.%2$s.getCheckedValues());
-                %1$s.setElementLabel(window.%2$s.getCheckedValues());
+                %1$s.setElementLabel(window.%2$s.getTextValue());
                 %1$s.close();
             })()',
             $this->getData('parent_id'),
