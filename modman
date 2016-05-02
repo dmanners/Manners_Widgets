@@ -1,2 +1,4 @@
-app/code/community/Manners/Widgets   app/code/community/Manners/Widgets
-app/etc/modules/Manners_Widgets.xml  app/etc/modules/Manners_Widgets.xml
+app/code/community/Manners/Widgets                              app/code/community/Manners/Widgets
+app/etc/modules/Manners_Widgets.xml                             app/etc/modules/Manners_Widgets.xml
+app/design/adminhtml/default/default/layout/manners/widgets.xml app/design/adminhtml/default/default/layout/manners/widgets.xml
+js/manners/adminhtml/widgets.js                                 js/manners/adminhtml/widgets.js

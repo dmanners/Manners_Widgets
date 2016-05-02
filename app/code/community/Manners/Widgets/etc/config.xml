@@ -38,4 +38,14 @@
             </adminhtml>
         </routers>
     </admin>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <manners_widgets>
+                    <file>manners/widgets.xml</file>
+                </manners_widgets>
+            </updates>
+        </layout>
+    </adminhtml>
 </config>
