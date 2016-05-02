@@ -1,17 +1,33 @@
 <?php
+
+/**
+ * @category    Manners
+ * @package     Manners_Widgets
+ * @copyright   Copyright (c) David Manners (http://davidmanners.de/)
+ */
+
 class Manners_Widgets_Block_Catalog_Product_Massaction extends Mage_Adminhtml_Block_Widget_Grid_Massaction
 {
+    /** @var string */
     private $sInternalName;
+
     /**
-     * Retrieve form field name for internal use. Based on $this->getFormFieldName()
+     * Set the field name for internal use
      *
-     * @return string
+     * @param string $sString
+     * @return Manners_Widgets_Block_Catalog_Product_Massaction
      */
     public function setFormFieldNameInternal($sString)
     {
-        return $this->sInternalName = $sString;
+        $this->sInternalName = $sString;
+        return $this;
     }
 
+    /**
+     * Get the form field name used internally
+     *
+     * @return string
+     */
     public function getFormFieldNameInternal()
     {
         if ($this->sInternalName !== null) {
@@ -43,12 +59,17 @@ class Manners_Widgets_Block_Catalog_Product_Massaction extends Mage_Adminhtml_Bl
         $iParentId = $this->getData('parent_id');
         return '
             (function(){
-                ' . $iParentId . '.setElementValue(window.'.$this->getJsObjectName().'.getCheckedValues());
-                ' . $iParentId . '.setElementLabel(window.'.$this->getJsObjectName().'.getCheckedValues());
-                '. $iParentId . '.close();
+                ' . $iParentId . '.setElementValue(window.' . $this->getJsObjectName() . '.getCheckedValues());
+                ' . $iParentId . '.setElementLabel(window.' . $this->getJsObjectName() . '.getCheckedValues());
+                ' . $iParentId . '.close();
             })()';
     }
 
+    /**
+     * Get the javascript used for the grid massaction
+     *
+     * @return string
+     */
     public function getJavaScript()
     {
         return " window.{$this->getJsObjectName()} = new varienGridMassaction('{$this->getHtmlId()}', "
