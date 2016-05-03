@@ -18,6 +18,7 @@
 			<codePool>community</codePool>
 			<depends>
 				<Mage_Adminhtml />
+				<Mage_Catalog />
 				<Mage_Widget />
 			</depends>
 		</Manners_Widgets>

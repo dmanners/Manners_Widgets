@@ -48,6 +48,6 @@ class Manners_Widgets_Block_Products extends Mage_Catalog_Block_Product implemen
     public function getPriceHtml(Mage_Catalog_Model_Product $oProduct)
     {
         $oProductBlock = $this->getLayout()->createBlock('catalog/product_price');
-        echo $oProductBlock->getPriceHtml($oProduct, true);
+        return $oProductBlock->getPriceHtml($oProduct, true);
     }
 }
