@@ -25,6 +25,12 @@
                 <class>Manners_Widgets_Helper</class>
             </manners_widgets>
         </helpers>
+
+        <models>
+            <manners_widgets>
+                <class>Manners_Widgets_Model</class>
+            </manners_widgets>
+        </models>
     </global>
 
     <admin>
