@@ -55,6 +55,9 @@ varienGridMassaction.addMethods(
                 this.textString = varienStringArray.remove(textValue, this.textString);
             }
         },
+        initTextValue: function(textValue) {
+            this.textString = textValue;
+        },
         getTextValue: function() {
             return this.textString;
         }

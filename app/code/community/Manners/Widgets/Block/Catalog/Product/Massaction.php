@@ -10,16 +10,30 @@ class Manners_Widgets_Block_Catalog_Product_Massaction extends Mage_Adminhtml_Bl
 {
     /** @var string */
     private $sInternalName;
+    /** @var string */
+    private $sInternalText;
+
+    /**
+     * Set the field text for internal use
+     *
+     * @param string $sInternalText
+     * @return Manners_Widgets_Block_Catalog_Product_Massaction
+     */
+    public function setFormFieldTextInternal($sInternalText)
+    {
+        $this->sInternalText = $sInternalText;
+        return $this;
+    }
 
     /**
      * Set the field name for internal use
      *
-     * @param string $sString
+     * @param string $sInternalName
      * @return Manners_Widgets_Block_Catalog_Product_Massaction
      */
-    public function setFormFieldNameInternal($sString)
+    public function setFormFieldNameInternal($sInternalName)
     {
-        $this->sInternalName = $sString;
+        $this->sInternalName = $sInternalName;
         return $this;
     }
 
@@ -34,6 +48,16 @@ class Manners_Widgets_Block_Catalog_Product_Massaction extends Mage_Adminhtml_Bl
             return $this->sInternalName;
         }
         return parent::getFormFieldNameInternal();
+    }
+
+    /**
+     * Get the form field text used internally
+     *
+     * @return string
+     */
+    public function getFormFieldTextInternal()
+    {
+        return $this->sInternalText;
     }
 
     /**
@@ -83,7 +107,8 @@ class Manners_Widgets_Block_Catalog_Product_Massaction extends Mage_Adminhtml_Bl
                 "%6$s");
             %1$s.setItems(%7$s);
             %1$s.setGridIds("%8$s");
-            %1$s.errorText = "%9$s"; ',
+            %1$s.errorText = "%9$s";
+            %1$s.initTextValue("%10$s");',
             $this->getJsObjectName(),
             $this->getHtmlId(),
             $this->getGridJsObjectName(),
@@ -92,7 +117,8 @@ class Manners_Widgets_Block_Catalog_Product_Massaction extends Mage_Adminhtml_Bl
             $this->getFormFieldName(),
             $this->getItemsJson(),
             $this->getGridIdsJson(),
-            $this->getErrorText()
+            $this->getErrorText(),
+            $this->getSelectedTextJson()
         );
         if ($this->getUseAjax()) {
             $sJavaScript .= sprintf(
@@ -107,5 +133,20 @@ class Manners_Widgets_Block_Catalog_Product_Massaction extends Mage_Adminhtml_Bl
             );
         }
         return $sJavaScript;
+    }
+
+    /**
+     * Retrieve JSON string of selected checkboxes
+     *
+     * @return string
+     */
+    private function getSelectedTextJson()
+    {
+        if($selected = $this->getRequest()->getParam($this->getFormFieldTextInternal())) {
+            $selected = explode(',', $selected);
+            return join(',', $selected);
+        } else {
+            return '';
+        }
     }
 }
