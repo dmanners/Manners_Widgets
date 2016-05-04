@@ -26,6 +26,7 @@ class Manners_Widgets_Model_Collection_Product
         $this->addAttributesToCollection();
 
         $this->oProductCollection->addFieldToFilter('entity_id', array('in' => $aProductIds));
+        $this->oProductCollection->setVisibility(Mage::getSingleton('catalog/product_visibility')->getVisibleInCatalogIds());
 
         $sCollectionOrder = new Zend_Db_Expr('FIELD(e.entity_id, ' . implode(',', $aProductIds).')');
         $this->oProductCollection->getSelect()->order($sCollectionOrder);
