@@ -70,6 +70,7 @@ class Manners_Widgets_Block_Catalog_Product_Widget_Chooser extends Mage_Adminhtm
         $oMassActionBlock = $this->getMassactionBlock();
         $oMassActionBlock->setFormFieldName('products');
         $oMassActionBlock->setFormFieldNameInternal('element_value');
+        $oMassActionBlock->setFormFieldTextInternal('element_label');
         $oMassActionBlock->setData('parent_id', $this->getId());
 
         /**
